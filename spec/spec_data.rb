@@ -24,6 +24,22 @@ describe Munger::Data do
     m.should be_valid
   end
   
+  it "should be able to add more data after init" do
+    m = Munger::Data.new
+    m.data = test_data
+    m.add_data more_test_data
+    m.should be_valid
+    additional_names = m.data.select { |r| r[:name] == 'David' || r[:name] == 'Michael' }
+    additional_names.should have(4).items
+  end
+  
+  it "should be able to add data without initial data" do
+    m = Munger::Data.new
+    m.add_data more_test_data
+    m.should be_valid
+    m.should have(4).items
+  end
+  
   it "should be able to extract columns from data" do
     @titles = @data.columns
     @titles.should have(4).items
@@ -129,11 +145,27 @@ describe Munger::Data do
     alice.sum_day.should eql(3)
   end
 
+  it "should be able to output an array" do
+    array = @data.to_a
+    array.should be_a_kind_of(Array)
+    array.first.size.should eql(@data.columns.size)
+  end
+  
+  it "should be able to output a filtered array" do
+    array = @data.to_a([:name, :age])
+    array.should be_a_kind_of(Array)
+    array.first.size.should eql(2)
+    scotts = array.select { |a| a.include? ('Scott') }
+    scotts.first.should include('Scott', 23)
+  end
+  
   it "should be able to pivot the data in three dimensions (2 col, 1 row)"
   
   it "should be able to pivot the data in four dimensions (2 col, 2 row)"
     
   it "should be able to add two Munger::Datas together if they have the same columns"
+  
+  it "should be able to add data and check if it is Munger::Data"
   
   it "(maybe) should be able to zip two Munger::Datas together given a unique key column in each"
   

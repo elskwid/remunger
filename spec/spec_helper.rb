@@ -26,6 +26,13 @@ module MungerSpecHelper
       ]
   end
   
+  def more_test_data
+    [{:name => 'David', :age => 40, :day => 1, :score => 12},
+     {:name => 'Michael',  :age => 32, :day => 2, :score => 20},
+     {:name => 'David', :age => 40, :day => 2, :score => 13},
+     {:name => 'Michael',  :age => 28, :day => 1, :score => 15}]
+  end
+  
   def invalid_test_data
     ['one', 'two', 'three']
   end

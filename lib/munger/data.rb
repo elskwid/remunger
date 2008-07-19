@@ -208,7 +208,7 @@ module Munger
       false
     end
 
-    # cols is an array of column names, if given the nested arrays are built in this order
+    # cols is an array of column names, if given, the nested arrays are built in this order
     def to_a(cols=nil)
       array = []
       cols ||= self.columns
