@@ -5,8 +5,8 @@ rescue LoadError
   require 'builder'
 end
 
-module Munger #:nodoc:
-  module Render #:nodoc:
+module Munger
+  module Render
     class Html
     
       attr_reader :report, :classes
@@ -50,7 +50,7 @@ module Munger #:nodoc:
             
             x.tr(row_attrib) do
               if row[:meta][:group_header]
-                header = row[:meta][:group_value].to_s
+                header = @report.column_title(row[:meta][:group_name]) + ' : ' + row[:meta][:group_value].to_s
                 x.th(:colspan => @report.columns.size) { x << header }
               else 
                 @report.columns.each do |column|
@@ -63,7 +63,28 @@ module Munger #:nodoc:
                     end
                   end
                 
-                  x.td(cell_attrib) { x << row[:data][column].to_s }
+                  # x.td(cell_attrib) { x << row[:data][column].to_s }
+                  # TODO: Clean this up, I don't like it but it's working
+                  # output the cell
+                  # x.td(cell_attrib) { x << row[:data][column].to_s }
+                  x.td(cell_attrib) do
+                    formatter,*args = *@report.column_formatter(column)
+                    col_data = row[:data] #[column]
+                    if formatter && col_data[column]
+                      formatted = if formatter.class == Proc
+                        data = col_data.respond_to?(:data) ? col_data.data : col_data
+                        formatter.call(data)
+                      elsif col_data[column].respond_to? formatter
+                        col_data[column].send(formatter, *args)
+                      elsif
+                        col_data[column].to_s
+                      end
+                    else
+                      formatted = col_data[column].to_s
+                    end
+                    x << formatted.to_s
+                  end
+                  
                 end
               end
             end
