@@ -1,4 +1,4 @@
-module Munger
+module Munger #:nodoc:
   
   # this class is a data munger
   #  it takes raw data (arrays of hashes, basically) 
@@ -26,6 +26,14 @@ module Munger
       @data
     end
     
+
+    #--
+    # NOTE:
+    # The name seems redundant; why:
+    #   Munger::Data.load_data(data)
+    # and not:
+    #   Munger::Data.load(data)
+    #++
     def self.load_data(data, options = {})
       Data.new(:data => data)
     end
@@ -124,12 +132,12 @@ module Munger
               newcol = key.to_s + '_' + col.to_s
               case key
               when :average
-                sum = data[:cells][col].inject(0) { |sum, a| sum + a.to_i }
+                sum = data[:cells][col].inject { |sum, a| sum + a }
                 new_row[newcol] = (sum / data[:count])  
               when :count
                 new_row[newcol] = data[:count]  
               else            
-                new_row[newcol] = data[:cells][col].inject(0) { |sum, a| sum + a.to_i }
+                new_row[newcol] = data[:cells][col].inject { |sum, a| sum + a }
               end
             end
             new_keys << newcol
@@ -153,7 +161,7 @@ module Munger
         focus = data_hash[row_key][column_key]
         focus[:data] = clean_data(row)
         focus[:count] += 1
-        focus[:sum] += row[value].to_i
+        focus[:sum] += row[value]
       end
       
       new_data = []

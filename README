@@ -15,7 +15,7 @@ See the Wiki for details : http://github.com/schacon/munger/wikis
 Munger creates reports in three stages, much like an Apollo rocket. My
 main problem with Ruport was the coupling of different parts of these
 stages in ways that didn't make the data easily re-usable, cacheable or 
-didn't give me enough control.  I likes to have my data separate from my 
+didn't give me enough control.  I like to have my data separate from my 
 report, which should be renderable however I want.
 
 * Stage 1 - Data Munging *
@@ -31,7 +31,7 @@ a table of all the actual data-points you need.
 Then there is the Reporting.  To me, this means taking your massaged dataset 
 and doing all the fun reporting to it.  This includes grouping, subgrouping, 
 sorting, column ordering, multi-level aggregation (sums, avg, etc) and 
-highlighting importanty information (values that are too small, too high, etc).
+highlighting important information (values that are too small, too high, etc).
 
 It can be argued that pivoting should be at this level, rather than the first,
 but I decided to put it there instead, mostly because I really think of the 
@@ -43,7 +43,7 @@ then running different reporting options on it.
 
 Now that I have my super spiffy report, I want to be able to render it however
 I want, possibly in multiple formats - HTML and XLS are the most important to 
-me, but PDF, text, csv, etc will also likely  be produced eventually.
+me, but PDF, text, csv, etc will also likely be produced eventually.
 
 
 Examples

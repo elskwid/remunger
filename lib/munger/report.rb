@@ -1,4 +1,4 @@
-module Munger
+module Munger #:nodoc:
   
   class Report
     
@@ -234,10 +234,10 @@ module Munger
           when :count
             data.size
           when :average
-            sum = data.inject(0) {|sum, n| sum + n.to_i }
-            (sum / data.size).to_i rescue 0
+            sum = data.inject {|sum, n| sum + n }
+            (sum / data.size) rescue 0
           else
-            data.inject(0) {|sum, n| sum + n.to_i }
+            data.inject {|sum, n| sum + n }
           end
         end
       end
@@ -324,8 +324,8 @@ module Munger
           b = Item.ensure(b)
       
           Data.array(@sort).each do |sorting|
-            if sorting.is_a? String
-              compare = a[sorting] <=> b[sorting] rescue 0
+            if sorting.is_a?(String) || sorting.is_a?(Symbol)
+              compare = a[sorting.to_s] <=> b[sorting.to_s] rescue 0
               break if compare != 0
             elsif sorting.is_a? Array
               key = sorting[0]
