@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
                "examples/column_add.rb",
                "examples/development.log",
                "examples/example_helper.rb",
-               "examples/sinatra.rb",
+               "examples/sinatra_app.rb",
                "examples/test.html",
                "lib/munger.rb",
                "lib/munger/data.rb",
