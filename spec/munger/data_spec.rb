@@ -123,6 +123,17 @@ describe Munger::Data do
     alice.Alice.should eql(2)
   end
 
+  it "should be able to add a column then pivot the data (1 column)" do
+    @data.add_column(:day_of_week) { |c| Date::DAYNAMES[c.day] }
+    orig_size = @data.size
+    new_keys = @data.pivot(:day_of_week, :name, :score)
+    @data.size.should < orig_size
+    new_keys.should include("Monday", "Tuesday")
+    alice = @data.data.select { |r| r.name == 'Alice' }.first
+    alice["Monday"].should eql(12)
+    alice["Tuesday"].should eql(24)
+  end
+  
   # like sql group command, give aggregation block
   it "should be able to group the data like sql" do
     @data.group(:name)
