@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
     s.platform  =  Gem::Platform::RUBY
     s.name      =  "munger"
-    s.version   =  "0.1.4.1"
+    s.version   =  "0.1.4.2"
     s.authors   =  ['Scott Chacon', 'Brandon Mitchell', 'Don Morrison', 'Eric Lindvall']
     s.email     =  "schacon@gmail.com"
     s.summary   =  "A reporting engine in Ruby"
