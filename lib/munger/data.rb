@@ -206,7 +206,7 @@ module Munger #:nodoc:
     def valid?
       if ((@data.size > 0) &&
         (@data.respond_to? :each_with_index) &&
-        (@data.first.respond_to? :keys)) &&
+        (@data.first.respond_to?(:keys) || @data.first.respond_to?(:attributes))) &&
         (!@data.first.is_a? String)
         return true
       else

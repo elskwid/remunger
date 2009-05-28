@@ -36,6 +36,10 @@ module MungerSpecHelper
   def invalid_test_data
     ['one', 'two', 'three']
   end
+  
+  def test_ar_data
+    test_data.map{|r| ARLike.new(r)}
+  end
 end
 
   
@@ -81,3 +85,22 @@ class Hash
 
 end
 
+##
+# Gives us a hash that acts like an ActiveRecord dataset (sort of)
+#
+class ARLike
+  
+  attr_accessor :attributes
+  
+  def initialize(attributes)
+    @attributes = attributes
+  end
+  
+  def [](key)
+    attributes[key]
+  end
+  
+  def []=(key, value)
+    attributes[key] = value
+  end
+end
