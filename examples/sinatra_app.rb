@@ -4,10 +4,10 @@ require File.expand_path(File.dirname(__FILE__) + "/../lib/remunger")
 
 get '/' do
   data = Remunger::Data.load_data(test_data)
-  
+
   report = Remunger::Report.from_data(data)
   report.process
-  
+
   out = Remunger::Render.to_html(report, :classes => {:table => 'other-class'} )
   show(out)
 end
@@ -15,7 +15,7 @@ end
 get '/pivot' do
   data = Remunger::Data.load_data(test_data)
 
-  data.add_column([:advert, :rate]) do |row| 
+  data.add_column([:advert, :rate]) do |row|
     rate = (row.clicks / row.airtime)
     [row.advert.capitalize, rate]
   end
@@ -36,7 +36,7 @@ end
 get '/example' do
   data = Remunger::Data.load_data(test_data)
 
-  data.add_column([:advert, :rate]) do |row| 
+  data.add_column([:advert, :rate]) do |row|
     rate = (row.clicks / row.airtime)
     [row.advert.capitalize, rate]
   end
@@ -54,7 +54,7 @@ get '/example' do
   report.style_cells('myRed', :only => :rate) { |cell, row| (cell.to_i < 10) }
 
   out = Remunger::Render.to_html(report, :classes => {:table => 'other-class'} )
-  
+
   show(out)
 end
 

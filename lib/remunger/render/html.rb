@@ -8,25 +8,25 @@ end
 module Remunger  #:nodoc:
   module Render  #:nodoc:
     class Html
-    
+
       attr_reader :report, :classes
-      
+
       def initialize(report, options = {})
         @report = report
         set_classes(options[:classes])
       end
-      
+
       def set_classes(options = nil)
         options = {} if !options
         default = {:table => 'report-table'}
         @classes = default.merge(options)
       end
-      
+
       def render
         x = Builder::XmlMarkup.new
-        
+
         x.table(:class => @classes[:table]) do
-          
+
           x.thead do
             x.tr do
               @report.columns.each do |column|
@@ -34,10 +34,10 @@ module Remunger  #:nodoc:
               end
             end
           end
-          
+
           x.tbody do
             @report.process_data.each do |row|
-            
+
               classes = []
               classes << row[:meta][:row_styles]
               classes << 'group' + row[:meta][:group].to_s if row[:meta][:group]
@@ -45,12 +45,12 @@ module Remunger  #:nodoc:
               classes.compact!
 
               if row[:meta][:group_header]
-                classes << 'groupHeader' + row[:meta][:group_header].to_s 
+                classes << 'groupHeader' + row[:meta][:group_header].to_s
               end
-            
+
               row_attrib = {}
               row_attrib = {:class => classes.join(' ')} if classes.size > 0
-            
+
               if row[:meta][:group_header]
                 x.thead do
                   x.tr(row_attrib) do
@@ -61,7 +61,7 @@ module Remunger  #:nodoc:
               else
                 x.tr(row_attrib) do
                   @report.columns.each do |column|
-                    
+
                     cell_attrib = {}
                     if cst = row[:meta][:cell_styles]
                       cst = Item.ensure(cst)
@@ -69,7 +69,7 @@ module Remunger  #:nodoc:
                         cell_attrib = {:class => cell_styles.join(' ')}
                       end
                     end
-                    
+
                     # x.td(cell_attrib) { x << row[:data][column].to_s }
                     # TODO: Clean this up, I don't like it but it's working
                     # output the cell
@@ -91,19 +91,19 @@ module Remunger  #:nodoc:
                       end
                       x << formatted.to_s
                     end
-                    
+
                   end # columns
                 end # x.tr
               end
-              
+
             end # rows
-            
+
           end # x.tbody
-          
+
         end # x.table
-        
+
       end
-      
+
       def cycle(one, two)
         if @current == one
           @current = two
@@ -111,11 +111,11 @@ module Remunger  #:nodoc:
           @current = one
         end
       end
-      
+
       def valid?
         @report.is_a? Remunger::Report
       end
-    
+
     end
   end
 end

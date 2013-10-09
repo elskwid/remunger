@@ -3,7 +3,7 @@ include ExampleHelper
 
 data = Remunger::Data.load_data(test_data)
 
-data.add_column([:advert, :rate]) do |row| 
+data.add_column([:advert, :rate]) do |row|
   rate = (row.clicks / row.airtime)
   [row.advert.capitalize, rate]
 end

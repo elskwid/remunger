@@ -1,11 +1,12 @@
 require 'builder'
+
 module Remunger  #:nodoc:
   module Render  #:nodoc:
     # Render a table that lets the user sort the columns
     class SortableHtml
-    
+
       attr_reader :report, :classes
-      
+
       # options:
       # :url => /some/url/for/link  # link to put on column
       # :params => {:url_params}    # parameters from url if any
@@ -19,18 +20,18 @@ module Remunger  #:nodoc:
         @options[:params] ||= {}
         set_classes(options[:classes])
       end
-      
+
       def set_classes(options = nil)
         options = {} if !options
         default = {:table => 'report-table'}
         @classes = default.merge(options)
       end
-      
+
       def render
         x = Builder::XmlMarkup.new
-        
+
         x.table(:class => @classes[:table]) do
-          
+
           x.thead do
             x.tr do
               @report.columns.each do |column|
@@ -47,17 +48,17 @@ module Remunger  #:nodoc:
                 end
 
                 new_params = @options[:params].merge({'sort' => @report.column_data_field(column),'order' => (order == 'asc' ? 'desc' : 'asc')})
-                x.th(:class => "columnTitle #{state} #{direction_class}") do 
-                   # x << @report.column_title(column) 
+                x.th(:class => "columnTitle #{state} #{direction_class}") do
+                   # x << @report.column_title(column)
                    x << "<a href=\"#{@options[:url]}?#{create_querystring(new_params)}\">#{@report.column_title(column)}</a>"
                  end
               end
             end
           end # x.thead
-          
+
           x.tbody do
             @report.process_data.each do |row|
-            
+
               classes = []
               classes << row[:meta][:row_styles]
               classes << 'group' + row[:meta][:group].to_s if row[:meta][:group]
@@ -65,12 +66,12 @@ module Remunger  #:nodoc:
               classes.compact!
 
               if row[:meta][:group_header]
-                classes << 'groupHeader' + row[:meta][:group_header].to_s 
+                classes << 'groupHeader' + row[:meta][:group_header].to_s
               end
-            
+
               row_attrib = {}
               row_attrib = {:class => classes.join(' ')} if classes.size > 0
-            
+
               if row[:meta][:group_header]
                 x.thead do
                   x.tr(row_attrib) do
@@ -78,10 +79,10 @@ module Remunger  #:nodoc:
                     x.th(:colspan => @report.columns.size) { x << header }
                   end
                 end
-              else 
+              else
                 x.tr(row_attrib) do
                   @report.columns.each do |column|
-              
+
                     cell_attrib = {}
                     if cst = row[:meta][:cell_styles]
                       cst = Item.ensure(cst)
@@ -113,15 +114,15 @@ module Remunger  #:nodoc:
                   end # columns
                 end # x.tr
               end
-              
+
             end # rows
-            
+
           end # x.tbody
-          
+
         end # x.table
-        
+
       end
-      
+
       def cycle(one, two)
         if @current == one
           @current = two
@@ -129,11 +130,11 @@ module Remunger  #:nodoc:
           @current = one
         end
       end
-      
+
       def valid?
         @report.is_a? Remunger::Report
       end
-    
+
       private
       def create_querystring(params={})
         qs = []
@@ -142,7 +143,7 @@ module Remunger  #:nodoc:
         end
         qs.join("&")
       end
-      
+
     end
   end
 end

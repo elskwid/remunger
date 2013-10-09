@@ -1,17 +1,17 @@
 module Remunger #:nodoc:
   module Render #:nodoc:
     class Text
-    
+
       attr_reader :report
-      
+
       def initialize(report)
         @report = report
       end
-      
+
       def render
         output = ''
         depth = {}
-        
+
         # find depth
         @report.process_data.each do |row|
           @report.columns.each do |column|
@@ -30,7 +30,7 @@ module Remunger #:nodoc:
 
         total = depth.values.inject { |sum, i| sum + i } + (depth.size * 3)
         0.upto(total) { |i| output += '-' }
-        output += "\n" 
+        output += "\n"
 
         # body
         @report.process_data.each do |row|
@@ -41,14 +41,14 @@ module Remunger #:nodoc:
           end
           output += "\n"
         end
-        
+
         output
       end
-      
+
       def valid?
         @report.is_a? Remunger::Report
       end
-    
+
     end
   end
 end
