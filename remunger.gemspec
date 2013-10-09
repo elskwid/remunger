@@ -1,15 +1,15 @@
 Gem::Specification.new do |s|
   s.platform  =  Gem::Platform::RUBY
-  s.name      =  "munger"
-  s.version   =  "0.1.4.2"
-  s.authors   =  ['Scott Chacon', 'Brandon Mitchell', 'Don Morrison', 'Eric Lindvall']
-  s.email     =  "schacon@gmail.com"
-  s.summary   =  "A reporting engine in Ruby"
-  s.homepage  =  "http://github/schacon/munger"
+  s.name      =  "remunger"
+  s.version   =  "0.1.0"
+  s.authors   =  ["Don Morrison"]
+  s.email     =  "don@elskwid.net"
+  s.summary   =  "A reporting engine in Ruby (formerly known as munger)."
+  s.homepage  =  "http://github/elskwid/remunger"
   s.has_rdoc  =  true
 
   s.files = [
-    "munger.gemspec",
+    "remunger.gemspec",
     "Rakefile",
     "README",
     "examples/column_add.rb",

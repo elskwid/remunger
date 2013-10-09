@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    munger (0.1.4.2)
+    remunger (0.1.0)
       builder
 
 GEM
@@ -16,5 +16,5 @@ PLATFORMS
 
 DEPENDENCIES
   minitest (~> 5.0.8)
-  munger!
   rake
+  remunger!
