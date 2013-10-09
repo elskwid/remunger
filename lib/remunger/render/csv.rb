@@ -1,4 +1,4 @@
-module Munger #:nodoc:
+module Remunger #:nodoc:
   module Render #:nodoc:
     class CSV #:nodoc:
     
@@ -23,7 +23,7 @@ module Munger #:nodoc:
       end
       
       def valid?
-        @report.is_a? Munger::Report
+        @report.is_a? Remunger::Report
       end
       
       private

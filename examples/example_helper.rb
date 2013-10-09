@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + "/../lib/munger")
+require File.expand_path(File.dirname(__FILE__) + "/../lib/remunger")
 
 require 'fileutils'
 require 'logger'

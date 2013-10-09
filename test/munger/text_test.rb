@@ -1,19 +1,19 @@
 require "test_helper"
 
-describe Munger::Render::Text do
-  include MungerSpecHelper
+describe Remunger::Render::Text do
+  include RemungerSpecHelper
 
   before(:each) do
-    @data = Munger::Data.new(:data => test_data)
-    @report = Munger::Report.new(:data => @data)
+    @data = Remunger::Data.new(:data => test_data)
+    @report = Remunger::Report.new(:data => @data)
   end
 
-  it "should accept a Munger::Report object" do
-    Munger::Render::Text.new(@report.process).must_be :valid?
+  it "should accept a Remunger::Report object" do
+    Remunger::Render::Text.new(@report.process).must_be :valid?
   end
 
   it "should render a basic text table" do
-    @render = Munger::Render::Text.new(@report.process)
+    @render = Remunger::Render::Text.new(@report.process)
     count = @report.rows
     text = @render.render
     text.split("\n").size.must_be :>, count

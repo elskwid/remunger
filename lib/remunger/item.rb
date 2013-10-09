@@ -1,4 +1,4 @@
-module Munger #:nodoc:
+module Remunger #:nodoc:
   
   class Item
     
@@ -35,7 +35,7 @@ module Munger #:nodoc:
     end
     
     def self.ensure(item)
-      if item.is_a? Munger::Item
+      if item.is_a? Remunger::Item
         return item
       else
         return Item.new(item)

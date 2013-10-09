@@ -1,18 +1,22 @@
-begin
-  require 'builder'
-rescue LoadError
-  require 'rubygems'
-  require 'builder'
-end
-
-module Munger  #:nodoc:
+require 'builder'
+module Remunger  #:nodoc:
   module Render  #:nodoc:
-    class Html
+    # Render a table that lets the user sort the columns
+    class SortableHtml
     
       attr_reader :report, :classes
       
+      # options:
+      # :url => /some/url/for/link  # link to put on column
+      # :params => {:url_params}    # parameters from url if any
+      # :sort => 'column'           # column that is currently sorted
+      # :order => 'asc' || 'desc'   # order of the currently sorted field
       def initialize(report, options = {})
         @report = report
+        @options = options
+        # default url and params options
+        @options[:url] ||= '/'
+        @options[:params] ||= {}
         set_classes(options[:classes])
       end
       
@@ -30,10 +34,26 @@ module Munger  #:nodoc:
           x.thead do
             x.tr do
               @report.columns.each do |column|
-                x.th(:class => 'columnTitle') { x << @report.column_title(column) }
+                # TODO: Should be able to see if a column is 'sortable'
+                # Assume all columns are sortable here - for now.
+                state = 'unsorted'
+                order = 'desc'
+                direction_class = ""
+
+                if [column.to_s, @report.column_data_field(column)].include?(@options[:sort])
+                  state = "sorted"
+                  order = @options[:order] || 'asc'
+                  direction_class = "sorted-#{order}"
+                end
+
+                new_params = @options[:params].merge({'sort' => @report.column_data_field(column),'order' => (order == 'asc' ? 'desc' : 'asc')})
+                x.th(:class => "columnTitle #{state} #{direction_class}") do 
+                   # x << @report.column_title(column) 
+                   x << "<a href=\"#{@options[:url]}?#{create_querystring(new_params)}\">#{@report.column_title(column)}</a>"
+                 end
               end
             end
-          end
+          end # x.thead
           
           x.tbody do
             @report.process_data.each do |row|
@@ -58,10 +78,10 @@ module Munger  #:nodoc:
                     x.th(:colspan => @report.columns.size) { x << header }
                   end
                 end
-              else
+              else 
                 x.tr(row_attrib) do
                   @report.columns.each do |column|
-                    
+              
                     cell_attrib = {}
                     if cst = row[:meta][:cell_styles]
                       cst = Item.ensure(cst)
@@ -69,8 +89,6 @@ module Munger  #:nodoc:
                         cell_attrib = {:class => cell_styles.join(' ')}
                       end
                     end
-                    
-                    # x.td(cell_attrib) { x << row[:data][column].to_s }
                     # TODO: Clean this up, I don't like it but it's working
                     # output the cell
                     # x.td(cell_attrib) { x << row[:data][column].to_s }
@@ -91,7 +109,7 @@ module Munger  #:nodoc:
                       end
                       x << formatted.to_s
                     end
-                    
+
                   end # columns
                 end # x.tr
               end
@@ -113,9 +131,18 @@ module Munger  #:nodoc:
       end
       
       def valid?
-        @report.is_a? Munger::Report
+        @report.is_a? Remunger::Report
       end
     
+      private
+      def create_querystring(params={})
+        qs = []
+        params.each do |k,v|
+          qs << "#{k}=#{v}"
+        end
+        qs.join("&")
+      end
+      
     end
   end
 end

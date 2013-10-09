@@ -1,4 +1,4 @@
-module Munger #:nodoc:
+module Remunger #:nodoc:
   
   class Report
     
@@ -6,7 +6,7 @@ module Munger #:nodoc:
     attr_accessor :column_titles, :column_data_fields, :column_formatters
     attr_reader :process_data, :grouping_level
     
-    # r = Munger::Report.new ( :data => data, 
+    # r = Remunger::Report.new ( :data => data, 
     #   :columns => [:collect_date, :spot_name, :airings, :display_name],
     #   :sort => [:collect_date, :spot_name]
     #   :subgroup => @group_list,
@@ -26,10 +26,10 @@ module Munger #:nodoc:
     
     def set_options(options)
       if d = options[:data]
-        if d.is_a? Munger::Data
+        if d.is_a? Remunger::Data
           @data = d
         else
-          @data = Munger::Data.new(:data => d)
+          @data = Remunger::Data.new(:data => d)
         end
       end
       self.sort(options[:sort]) if options[:sort]
@@ -122,7 +122,7 @@ module Munger #:nodoc:
     end
     
     def valid?
-      (@data.is_a? Munger::Data) && (@data.valid?)
+      (@data.is_a? Remunger::Data) && (@data.valid?)
     end
 
     # @report.style_cells('highlight') { |cell, row| cell > 32 }

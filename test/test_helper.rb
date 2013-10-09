@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "minitest/pride"
-require "munger"
+require "remunger"
 
 require "fileutils"
 require "logger"
@@ -10,7 +10,7 @@ require "date"
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-module MungerSpecHelper
+module RemungerSpecHelper
   def test_data
     [{:name => "Scott", :age => 23, :day => 1, :score => 12},
      {:name => "Chaz",  :age => 28, :day => 1, :score => 12},

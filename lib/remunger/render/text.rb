@@ -1,4 +1,4 @@
-module Munger #:nodoc:
+module Remunger #:nodoc:
   module Render #:nodoc:
     class Text
     
@@ -46,7 +46,7 @@ module Munger #:nodoc:
       end
       
       def valid?
-        @report.is_a? Munger::Report
+        @report.is_a? Remunger::Report
       end
     
     end

@@ -1,4 +1,4 @@
-module Munger #:nodoc:
+module Remunger #:nodoc:
   
   # this class is a data munger
   #  it takes raw data (arrays of hashes, basically) 
@@ -30,9 +30,9 @@ module Munger #:nodoc:
     #--
     # NOTE:
     # The name seems redundant; why:
-    #   Munger::Data.load_data(data)
+    #   Remunger::Data.load_data(data)
     # and not:
-    #   Munger::Data.load(data)
+    #   Remunger::Data.load(data)
     #++
     def self.load_data(data, options = {})
       Data.new(:data => data)
@@ -208,7 +208,7 @@ module Munger #:nodoc:
         (@data.respond_to? :each_with_index) &&
         (@data.first.respond_to?(:keys) || 
          @data.first.respond_to?(:attributes) || 
-         @data.first.is_a?(Munger::Item))) &&
+         @data.first.is_a?(Remunger::Item))) &&
         (!@data.first.is_a? String)
         return true
       else

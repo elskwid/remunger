@@ -1,31 +1,31 @@
 require "test_helper"
 
-describe Munger::Data do
-  include MungerSpecHelper
+describe Remunger::Data do
+  include RemungerSpecHelper
 
   before(:each) do
-    @data = Munger::Data.new(:data => test_data)
+    @data = Remunger::Data.new(:data => test_data)
   end
 
   it "must accept an array of hashes" do
-    Munger::Data.new(:data => test_data).must_be :valid?
+    Remunger::Data.new(:data => test_data).must_be :valid?
   end
 
   it "must be able to set data after init" do
-    m = Munger::Data.new
+    m = Remunger::Data.new
     m.data = test_data
     m.must_be :valid?
   end
 
   it "must be able to set data in init block" do
-    m = Munger::Data.new do |d|
+    m = Remunger::Data.new do |d|
       d.data = test_data
     end
     m.must_be :valid?
   end
 
   it "must be able to add more data after init" do
-    m = Munger::Data.new
+    m = Remunger::Data.new
     m.data = test_data
     m.add_data more_test_data
     m.must_be :valid?
@@ -34,7 +34,7 @@ describe Munger::Data do
   end
 
   it "must be able to add data without initial data" do
-    m = Munger::Data.new
+    m = Remunger::Data.new
     m.add_data more_test_data
     m.must_be :valid?
     m.size.must_equal(4)
@@ -176,10 +176,10 @@ describe Munger::Data do
 
   it "must be able to pivot the data in four dimensions (2 col, 2 row)"
 
-  it "must be able to add two Munger::Datas together if they have the same columns"
+  it "must be able to add two Remunger::Datas together if they have the same columns"
 
-  it "must be able to add data and check if it is Munger::Data"
+  it "must be able to add data and check if it is Remunger::Data"
 
-  it "(maybe) must be able to zip two Munger::Datas together given a unique key column in each"
+  it "(maybe) must be able to zip two Remunger::Datas together given a unique key column in each"
 
 end

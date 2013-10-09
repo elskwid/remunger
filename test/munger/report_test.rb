@@ -1,20 +1,20 @@
 require "test_helper"
 
-describe Munger::Report do
-  include MungerSpecHelper
+describe Remunger::Report do
+  include RemungerSpecHelper
 
   before(:each) do
-    @data = Munger::Data.new(:data => test_data)
-    @report = Munger::Report.new(:data => @data)
+    @data = Remunger::Data.new(:data => test_data)
+    @report = Remunger::Report.new(:data => @data)
   end
 
-  it "must accept a Munger::Data object" do
-    Munger::Report.new(:data => @data).must_be :valid?
+  it "must accept a Remunger::Data object" do
+    Remunger::Report.new(:data => @data).must_be :valid?
   end
 
   it "must accept a array of hashes" do
-    Munger::Report.new(:data => test_data).must_be :valid?
-    Munger::Report.new(:data => invalid_test_data).wont_be :valid?
+    Remunger::Report.new(:data => test_data).must_be :valid?
+    Remunger::Report.new(:data => invalid_test_data).wont_be :valid?
   end
 
   it "must be able to sort fields by array" do
@@ -62,7 +62,7 @@ describe Munger::Report do
   #  do
   #   @report.sort('score').subgroup('score', :with_headers => true)
   #   @report.aggregate(:sum => :score).process
-  #   puts Munger::Render.to_text(@report)
+  #   puts Remunger::Render.to_text(@report)
   # end
 
   it "must add the grouping name on the group line somewhere"

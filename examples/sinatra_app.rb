@@ -1,19 +1,19 @@
 require 'rubygems'
 require 'sinatra'
-require File.expand_path(File.dirname(__FILE__) + "/../lib/munger")
+require File.expand_path(File.dirname(__FILE__) + "/../lib/remunger")
 
 get '/' do
-  data = Munger::Data.load_data(test_data)
+  data = Remunger::Data.load_data(test_data)
   
-  report = Munger::Report.from_data(data)
+  report = Remunger::Report.from_data(data)
   report.process
   
-  out = Munger::Render.to_html(report, :classes => {:table => 'other-class'} )
+  out = Remunger::Render.to_html(report, :classes => {:table => 'other-class'} )
   show(out)
 end
 
 get '/pivot' do
-  data = Munger::Data.load_data(test_data)
+  data = Remunger::Data.load_data(test_data)
 
   data.add_column([:advert, :rate]) do |row| 
     rate = (row.clicks / row.airtime)
@@ -22,19 +22,19 @@ get '/pivot' do
 
   new_columns = data.pivot('airtime', 'advert', 'rate', :average)
 
-  report = Munger::Report.from_data(data)
+  report = Remunger::Report.from_data(data)
   report.columns([:advert] + new_columns.sort)
   report.process
 
   report.style_cells('myRed', :only => new_columns) { |cell, row| (cell.to_i < 10 && cell.to_i > 0) }
 
-  out = Munger::Render.to_html(report, :classes => {:table => 'other-class'} )
+  out = Remunger::Render.to_html(report, :classes => {:table => 'other-class'} )
 
   show(out)
 end
 
 get '/example' do
-  data = Munger::Data.load_data(test_data)
+  data = Remunger::Data.load_data(test_data)
 
   data.add_column([:advert, :rate]) do |row| 
     rate = (row.clicks / row.airtime)
@@ -44,7 +44,7 @@ get '/example' do
   #data.filter_rows { |row| row.rate > 10 }
   #new_columns = data.pivot('airtime', 'advert', 'rate', :average)
 
-  report = Munger::Report.from_data(data)
+  report = Remunger::Report.from_data(data)
   report.columns(:advert => 'Spot', :airdate => 'Air Date', :airtime => 'Airtime', :rate => 'Rate')
   report.sort = [['airtime', :asc], ['rate', :asc]]
   report.subgroup('airtime', :with_titles => true)
@@ -53,7 +53,7 @@ get '/example' do
 
   report.style_cells('myRed', :only => :rate) { |cell, row| (cell.to_i < 10) }
 
-  out = Munger::Render.to_html(report, :classes => {:table => 'other-class'} )
+  out = Remunger::Render.to_html(report, :classes => {:table => 'other-class'} )
   
   show(out)
 end

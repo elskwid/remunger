@@ -1,31 +1,31 @@
 require "test_helper"
 
-describe "Munger::Data with AR like records" do
-  include MungerSpecHelper
+describe "Remunger::Data with AR like records" do
+  include RemungerSpecHelper
 
   before(:each) do
-    @data = Munger::Data.new(:data => test_ar_data)
+    @data = Remunger::Data.new(:data => test_ar_data)
   end
 
   it "must accept an AR dataset" do
-    Munger::Data.new(:data => test_ar_data).must_be :valid?
+    Remunger::Data.new(:data => test_ar_data).must_be :valid?
   end
 
   it "must be able to set AR data after init" do
-    m = Munger::Data.new
+    m = Remunger::Data.new
     m.data = test_ar_data
     m.must_be :valid?
   end
 
   it "must be able to set AR data in init block" do
-    m = Munger::Data.new do |d|
+    m = Remunger::Data.new do |d|
       d.data = test_ar_data
     end
     m.must_be :valid?
   end
   #
   it "must be able to add more data after init" do
-    m = Munger::Data.new
+    m = Remunger::Data.new
     m.data = test_ar_data
     m.add_data more_test_data
     m.must_be :valid?
