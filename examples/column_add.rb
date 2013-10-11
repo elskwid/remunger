@@ -21,7 +21,7 @@ report.process
 
 report.style_cells('myRed', :only => :rate) { |cell, row| (cell.to_i < 10) }
 
-#puts html = Remunger::Render.to_html(report, :classes => {:table => 'other-class'} )
+puts html = Remunger::Render.to_html(report, :classes => {:table => 'other-class'} )
 puts text = Remunger::Render.to_text(report)
 
 
