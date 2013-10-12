@@ -1,46 +1,21 @@
-Gem::Specification.new do |s|
-  s.platform  =  Gem::Platform::RUBY
-  s.name      =  "remunger"
-  s.version   =  "0.1.0"
-  s.authors   =  ["Don Morrison"]
-  s.email     =  "don@elskwid.net"
-  s.summary   =  "A reporting engine in Ruby (formerly known as munger)."
-  s.homepage  =  "http://github/elskwid/remunger"
-  s.has_rdoc  =  true
+# -*- encoding: utf-8 -*-
+require File.expand_path("../lib/remunger/version", __FILE__)
 
-  s.files = [
-    "remunger.gemspec",
-    "Rakefile",
-    "README",
-    "examples/column_add.rb",
-    "examples/development.log",
-    "examples/example_helper.rb",
-    "examples/sinatra_app.rb",
-    "examples/test.html",
-    "lib/munger.rb",
-    "lib/munger/data.rb",
-    "lib/munger/item.rb",
-    "lib/munger/render.rb",
-    "lib/munger/report.rb",
-    "lib/munger/render/csv.rb",
-    "lib/munger/render/html.rb",
-    "lib/munger/render/sortable_html.rb",
-    "lib/munger/render/text.rb"]
+Gem::Specification.new do |spec|
+  spec.name          = "remunger"
+  spec.version       = Remunger::VERSION
+  spec.summary       = "A report data munger in Ruby."
+  spec.description   = "Remunger is a report munger written in Ruby to aid in the processing and display of tabular data."
+  spec.authors       = ["Don Morrison"]
+  spec.email         = ["don@elskwid.net"]
+  spec.homepage      = "http://github/elskwid/remunger"
 
-  s.test_files = [
-    "test/test_helper.rb",
-    "test/munger/csv_test.rb",
-    "test/munger/data_ar_test.rb",
-    "test/munger/data_test.rb",
-    "test/munger/html_test.rb",
-    "test/munger/item_test.rb",
-    "test/munger/new_test.rb",
-    "test/munger/render_test.rb",
-    "test/munger/report_test.rb",
-    "test/munger/text_test.rb"]
+  spec.files         = `git ls-files`.split($/)
+  spec.test_files    = `git ls-files -- test/*`.split("\n")
+  spec.require_paths = ["lib"]
 
-  s.add_dependency "builder"
+  spec.add_dependency "builder"
 
-  s.add_development_dependency "rake"
-  s.add_development_dependency "minitest", "~>5.0.8"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "minitest", "~>5.0.8"
 end
