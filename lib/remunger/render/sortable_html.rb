@@ -1,4 +1,4 @@
-require 'builder'
+require "builder"
 
 module Remunger  #:nodoc:
   module Render  #:nodoc:

@@ -1,9 +1,4 @@
-begin
-  require 'builder'
-rescue LoadError
-  require 'rubygems'
-  require 'builder'
-end
+require "builder"
 
 module Remunger  #:nodoc:
   module Render  #:nodoc:

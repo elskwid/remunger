@@ -1,5 +1,4 @@
 module Remunger #:nodoc:
-
   class Report
 
     attr_writer :data, :sort, :columns, :subgroup, :subgroup_options, :aggregate
@@ -344,5 +343,4 @@ module Remunger #:nodoc:
       end
 
   end
-
 end

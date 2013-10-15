@@ -1,5 +1,4 @@
 module Remunger #:nodoc:
-
   # this class is a data munger
   #  it takes raw data (arrays of hashes, basically)
   #  and can manipulate it in various interesting ways
@@ -229,5 +228,4 @@ module Remunger #:nodoc:
     end
 
   end
-
 end

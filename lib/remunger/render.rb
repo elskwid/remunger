@@ -1,5 +1,3 @@
-# Remunger::Render.to_html(report)
-
 module Remunger #:nodoc:
   module Render
 
@@ -18,5 +16,6 @@ module Remunger #:nodoc:
     def self.to_csv(report)
       CSV::new(report).render
     end
+
   end
 end
