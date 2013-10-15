@@ -1,8 +1,7 @@
 require "builder"
 
-module Remunger  #:nodoc:
-  module Render  #:nodoc:
-    # Render a table that lets the user sort the columns
+module Remunger
+  module Render
     class SortableHtml
 
       attr_reader :report, :classes

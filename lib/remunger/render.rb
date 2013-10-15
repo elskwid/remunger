@@ -1,4 +1,4 @@
-module Remunger #:nodoc:
+module Remunger
   module Render
 
     def self.to_html(report, options = {})

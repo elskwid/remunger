@@ -1,6 +1,6 @@
-module Remunger #:nodoc:
-  module Render #:nodoc:
-    class CSV #:nodoc:
+module Remunger
+  module Render
+    class CSV
 
       attr_reader :report
 

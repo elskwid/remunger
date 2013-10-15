@@ -1,7 +1,7 @@
 require "builder"
 
-module Remunger  #:nodoc:
-  module Render  #:nodoc:
+module Remunger
+  module Render
     class Html
 
       attr_reader :report, :classes

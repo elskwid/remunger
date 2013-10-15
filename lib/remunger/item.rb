@@ -1,4 +1,4 @@
-module Remunger #:nodoc:
+module Remunger
   class Item
 
     attr_reader :data

@@ -1,7 +1,4 @@
-module Remunger #:nodoc:
-  # this class is a data munger
-  #  it takes raw data (arrays of hashes, basically)
-  #  and can manipulate it in various interesting ways
+module Remunger
   class Data
 
     attr_accessor :data
@@ -25,14 +22,6 @@ module Remunger #:nodoc:
       @data
     end
 
-
-    #--
-    # NOTE:
-    # The name seems redundant; why:
-    #   Remunger::Data.load_data(data)
-    # and not:
-    #   Remunger::Data.load(data)
-    #++
     def self.load_data(data, options = {})
       Data.new(:data => data)
     end

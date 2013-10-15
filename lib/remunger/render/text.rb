@@ -1,5 +1,5 @@
-module Remunger #:nodoc:
-  module Render #:nodoc:
+module Remunger
+  module Render
     class Text
 
       attr_reader :report
