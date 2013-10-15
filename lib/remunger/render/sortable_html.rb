@@ -135,6 +135,7 @@ module Remunger
       end
 
       private
+
       def create_querystring(params={})
         qs = []
         params.each do |k,v|
